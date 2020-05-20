@@ -1,0 +1,133 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000                 AREA             eg3,CODE,READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         
+    8 00000000         __main
+    9 00000000         
+   10 00000000 F20F 0412 
+              F104 0400        ADRL             R4,vals     ;R4 POINTER POINT T
+                                                            O VALS AREA
+   11 00000008 6861            LDR              R1,[R4,#Q]
+   12 0000000A 68A2            LDR              R2,[R4,#R]
+   13 0000000C 68E3            LDR              R3,[R4,#S]
+   14 0000000E         
+   15 0000000E EB01 0502       ADD              R5,R1,R2
+   16 00000012 441D            ADD              R5,R5,R3
+   17 00000014 E7FE    STOP    B                STOP
+   18 00000016         
+   19 00000016         
+   20 00000016         
+   21 00000016         
+   22 00000016 00000000 
+                       P       EQU              0
+   23 00000016 00000004 
+                       Q       EQU              4
+   24 00000016 00000008 
+                       R       EQU              8
+   25 00000016 0000000C 
+                       S       EQU              12
+   26 00000016         
+   27 00000016                 AREA             eg3,DATA,READONLY
+   28 00000016         
+   29 00000016 00 00 00 
+              00       vals    SPACE            4
+   30 0000001A 00 00 00000002  DCD              2
+   31 00000020 0000000A        DCD              10
+   32 00000024 0000000C        DCD              12
+   33 00000028         
+   34 00000028                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STOP 00000014
+
+Symbol: STOP
+   Definitions
+      At line 17 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: STOP used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 8 in file main.s
+   Uses
+      At line 6 in file main.s
+Comment: __main used once
+eg3 00000000
+
+Symbol: eg3
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: eg3 unused
+vals 00000016
+
+Symbol: vals
+   Definitions
+      At line 29 in file main.s
+   Uses
+      At line 10 in file main.s
+Comment: vals used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+P 00000000
+
+Symbol: P
+   Definitions
+      At line 22 in file main.s
+   Uses
+      None
+Comment: P unused
+Q 00000004
+
+Symbol: Q
+   Definitions
+      At line 23 in file main.s
+   Uses
+      At line 11 in file main.s
+Comment: Q used once
+R 00000008
+
+Symbol: R
+   Definitions
+      At line 24 in file main.s
+   Uses
+      At line 12 in file main.s
+Comment: R used once
+S 0000000C
+
+Symbol: S
+   Definitions
+      At line 25 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: S used once
+4 symbols
+344 symbols in table

@@ -1,0 +1,139 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000 2001BFFC 
+                       Stack_Top
+                               EQU              0x2001BFFC
+    3 00000000         
+    4 00000000                 AREA             mycode,CODE,READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         
+    8 00000000         __main
+    9 00000000 F8DF D038       LDR              R13,=Stack_Top ;load SP 
+   10 00000004 F240 1025       LDR              R0,=0x125   ;R0 = 0x125 
+   11 00000008 F44F 71A2       LDR              R1,=0x144   ;R1 = 0x144 
+   12 0000000C F04F 0256       MOV              R2,#0x56    ;R2 = 0x56 
+   13 00000010 F000 F802       BL               MY_SUB      ;call a subroutine 
+                                                            ADD R3,R0,R1
+   14 00000014         
+   15 00000014         ;R3 = R0 + R1 = 0x125 + 0x144 = 0x269 
+   16 00000014 4413            ADD              R3,R3,R2    ;R3 = R3 + R2 = 0x2
+                                                            69 + 0x56 = 0x2BF 
+   17 00000016 E7FE    HERE    B                HERE        ;stay here
+   18 00000018         
+   19 00000018         
+   20 00000018         MY_SUB
+   21 00000018         ;save R0, R1, and R2 on stack ;before they are used by a
+                        loop 
+   22 00000018 9000            STR              R0,[R13]    ;save R0 on stack 
+   23 0000001A B081            SUB              R13,R13,#4  ;R13 = R13 - 4, to 
+                                                            decrement the stack
+                                                             pointer 
+   24 0000001C 9100            STR              R1,[R13]    ;save R1 on stack 
+   25 0000001E B081            SUB              R13,R13,#4  ;R13 = R13 - 4, to 
+                                                            decrement the stack
+                                                             pointer
+   26 00000020 9200            STR              R2,[R13]    ;save R2 on stack 
+   27 00000022 B081            SUB              R13,R13,#4  ;R13 = R13 - 4, to 
+                                                            decrement the stack
+                                                             pointer
+   28 00000024         
+   29 00000024 F04F 0000       MOV              R0,#0       ;R0 = 0 
+   30 00000028 F04F 0100       MOV              R1,#0       ;R1 = 0 
+   31 0000002C F04F 0200       MOV              R2,#0       ;R2 = 0
+   32 00000030         
+   33 00000030         
+   34 00000030 B001            ADD              R13,R13,#4  ;R13 = R13 + 4 to i
+                                                            ncrement the stack 
+                                                            pointer 
+   35 00000032 9A00            LDR              R2,[R13]    ;restore R2 from st
+                                                            ack 
+   36 00000034 B001            ADD              R13,R13,#4  ;R13 = R13 + 4 to i
+                                                            ncrement the stack 
+                                                            pointer 
+   37 00000036 9900            LDR              R1,[R13]    ;restore R1 from st
+                                                            ack 
+   38 00000038 B001            ADD              R13,R13,#4  ;R13 = R13 + 4 to i
+                                                            ncrement the stack 
+                                                            pointer 
+   39 0000003A 9800            LDR              R0,[R13]    ;restore R0 from st
+                                                            ack BX LR ;return t
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            o caller
+   40 0000003C         
+   41 0000003C         
+   42 0000003C                 ALIGN
+   43 0000003C                 END
+              2001BFFC 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+HERE 00000016
+
+Symbol: HERE
+   Definitions
+      At line 17 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: HERE used once
+MY_SUB 00000018
+
+Symbol: MY_SUB
+   Definitions
+      At line 20 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: MY_SUB used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 8 in file main.s
+   Uses
+      At line 6 in file main.s
+Comment: __main used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: mycode unused
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+Stack_Top 2001BFFC
+
+Symbol: Stack_Top
+   Definitions
+      At line 2 in file main.s
+   Uses
+      At line 9 in file main.s
+Comment: Stack_Top used once
+1 symbol
+343 symbols in table

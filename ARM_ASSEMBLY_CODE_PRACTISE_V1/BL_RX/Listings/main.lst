@@ -1,0 +1,126 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000 00000064 
+                       TEMP    EQU              100
+    3 00000000         
+    4 00000000         
+    5 00000000 20000000 
+                       RAM_ADDR
+                               EQU              0x20000000
+    6 00000000         
+    7 00000000                 AREA             mycode,CODE,READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           __main
+   10 00000000         
+   11 00000000         __main
+   12 00000000 F04F 5000       LDR              R0,=RAM_ADDR
+   13 00000004 F04F 0155 
+                       Again   MOV              R1,#0x55
+   14 00000008 7001            STRB             R1,[R0]
+   15 0000000A F000 F806       BL               Delay
+   16 0000000E F04F 01AA       MOV              R1,#0xAA
+   17 00000012 7001            STRB             R1,[R0]
+   18 00000014 F000 F801       BL               Delay
+   19 00000018 E7F4            B                Again
+   20 0000001A         
+   21 0000001A         Delay
+   22 0000001A F04F 0305       LDR              R3,=5
+   23 0000001E 1E5B    L1      SUBS             R3,R3,#1
+   24 00000020 D1FD            BNE              L1          ;run while z!=0
+   25 00000022 4770            BX               LR
+   26 00000024         
+   27 00000024 E7FE    loop    B                loop
+   28 00000026 00 00           ALIGN
+   29 00000028                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Again 00000004
+
+Symbol: Again
+   Definitions
+      At line 13 in file main.s
+   Uses
+      At line 19 in file main.s
+Comment: Again used once
+Delay 0000001A
+
+Symbol: Delay
+   Definitions
+      At line 21 in file main.s
+   Uses
+      At line 15 in file main.s
+      At line 18 in file main.s
+
+L1 0000001E
+
+Symbol: L1
+   Definitions
+      At line 23 in file main.s
+   Uses
+      At line 24 in file main.s
+Comment: L1 used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 11 in file main.s
+   Uses
+      At line 9 in file main.s
+Comment: __main used once
+loop 00000024
+
+Symbol: loop
+   Definitions
+      At line 27 in file main.s
+   Uses
+      At line 27 in file main.s
+Comment: loop used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file main.s
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+RAM_ADDR 20000000
+
+Symbol: RAM_ADDR
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 12 in file main.s
+Comment: RAM_ADDR used once
+TEMP 00000064
+
+Symbol: TEMP
+   Definitions
+      At line 2 in file main.s
+   Uses
+      None
+Comment: TEMP unused
+2 symbols
+344 symbols in table

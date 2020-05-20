@@ -1,0 +1,126 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000 00000064 
+                       TEMP    EQU              100
+    3 00000000         
+    4 00000000                 AREA             data,DATA,READONLY
+    5 00000000 00000064 
+                       myport  DCD              100
+    6 00000004         
+    7 00000004                 AREA             mycode,CODE,READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           __main
+   10 00000000         
+   11 00000000         __main
+   12 00000000 F04F 0064       MOV              R0,#TEMP    ;R0 = Temp
+   13 00000004 4904            LDR              R1,=myport  ;port address
+   14 00000006 780A    OVER    LDRB             R2,[R1]     ;load R2 from mypor
+                                                            t
+   15 00000008 EA92 0F00       TEQ              R2,R0       ;is it 100?
+   16 0000000C D000            BEQ              just
+   17 0000000E D1FA            BNE              OVER        ;keep checking
+   18 00000010         just
+   19 00000010 F04F 00C8       LDR              R0,=200
+   20 00000014         
+   21 00000014 E7FE    loop    B                loop
+   22 00000016 00 00           ALIGN
+   23 00000018                 END
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+data 00000000
+
+Symbol: data
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: data unused
+myport 00000000
+
+Symbol: myport
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: myport used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+OVER 00000006
+
+Symbol: OVER
+   Definitions
+      At line 14 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: OVER used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 11 in file main.s
+   Uses
+      At line 9 in file main.s
+Comment: __main used once
+just 00000010
+
+Symbol: just
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: just used once
+loop 00000014
+
+Symbol: loop
+   Definitions
+      At line 21 in file main.s
+   Uses
+      At line 21 in file main.s
+Comment: loop used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file main.s
+   Uses
+      None
+Comment: mycode unused
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+TEMP 00000064
+
+Symbol: TEMP
+   Definitions
+      At line 2 in file main.s
+   Uses
+      At line 12 in file main.s
+Comment: TEMP used once
+1 symbol
+346 symbols in table

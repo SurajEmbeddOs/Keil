@@ -1,0 +1,66 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000                 AREA             fpu,CODE,READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         
+    8 00000000         __main
+    9 00000000 4805            LDR              R0,= 0xE000ED88
+   10 00000002 6801            LDR              R1,[r0]
+   11 00000004 F441 0170       ORR              R1,R1,#(0xF<<20)
+   12 00000008 6001            STR              R1,[R0]
+   13 0000000A         
+   14 0000000A EEB7 0A00       VMOV.F           S0,#0x3F800000
+   15 0000000E EEF0 0A40       VMOV.F           S1,S0
+   16 00000012 EE30 1A80       VADD.F           S2,S1,S0
+   17 00000016         
+   18 00000016 E7FE    stop    B                stop
+   19 00000018                 ALIGN
+   20 00000018                 END
+              E000ED88 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 8 in file main.s
+   Uses
+      At line 6 in file main.s
+Comment: __main used once
+fpu 00000000
+
+Symbol: fpu
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: fpu unused
+stop 00000016
+
+Symbol: stop
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 18 in file main.s
+Comment: stop used once
+3 symbols
+341 symbols in table

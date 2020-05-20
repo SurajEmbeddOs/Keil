@@ -1,0 +1,132 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         ; find max number amonge them 25,65,28,68,95,12
+    4 00000000         
+    5 00000000        0 
+                       Pointer RN               R0
+    6 00000000        1 
+                       Count   RN               R1
+    7 00000000        3 
+                       MAX     RN               R3
+    8 00000000        4 
+                       Next    RN               R4
+    9 00000000         
+   10 00000000         
+   11 00000000                 AREA             myData,DATA,READONLY
+   12 00000000 00000025 
+              00000065 
+              00000028 
+              00000068 
+              00000095 
+              00000025 MyDATA  DCD              0x25,0x65,0x28,0x68,0x95,0x25
+   13 00000018         
+   14 00000018         
+   15 00000018                 AREA             myCode,CODE,READONLY
+   16 00000000                 ENTRY
+   17 00000000                 EXPORT           __main
+   18 00000000         
+   19 00000000         
+   20 00000000         __main
+   21 00000000 4806            LDR              Pointer,=MyDATA
+   22 00000002 F04F 0300       MOV              MAX,#0
+   23 00000006 F04F 0106       MOV              Count,#6
+   24 0000000A         
+   25 0000000A 6804    Again   LDR              Next,[Pointer]
+   26 0000000C 42A3            CMP              MAX,Next    ;MAX-Next ;  
+   27 0000000E D200            BHS              jump        ;if c=1 jump
+   28 00000010 4623            MOV              MAX,Next
+   29 00000012 F100 0004 
+                       jump    ADD              Pointer,Pointer,#4
+   30 00000016 1E49            SUBS             Count,Count,#1
+   31 00000018         
+   32 00000018 D1F7            BNE              Again
+   33 0000001A         
+   34 0000001A E7FE    loop    B                loop
+   35 0000001C         
+   36 0000001C                 ALIGN
+   37 0000001C                 END
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MyDATA 00000000
+
+Symbol: MyDATA
+   Definitions
+      At line 12 in file main.s
+   Uses
+      At line 21 in file main.s
+Comment: MyDATA used once
+myData 00000000
+
+Symbol: myData
+   Definitions
+      At line 11 in file main.s
+   Uses
+      None
+Comment: myData unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Again 0000000A
+
+Symbol: Again
+   Definitions
+      At line 25 in file main.s
+   Uses
+      At line 32 in file main.s
+Comment: Again used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 20 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: __main used once
+jump 00000012
+
+Symbol: jump
+   Definitions
+      At line 29 in file main.s
+   Uses
+      At line 27 in file main.s
+Comment: jump used once
+loop 0000001A
+
+Symbol: loop
+   Definitions
+      At line 34 in file main.s
+   Uses
+      At line 34 in file main.s
+Comment: loop used once
+myCode 00000000
+
+Symbol: myCode
+   Definitions
+      At line 15 in file main.s
+   Uses
+      None
+Comment: myCode unused
+5 symbols
+349 symbols in table

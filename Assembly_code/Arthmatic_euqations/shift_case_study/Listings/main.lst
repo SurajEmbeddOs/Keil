@@ -1,0 +1,79 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ;(A+8E+7C-27)/4
+    3 00000000         ;let A=25,E=19,C=99 
+    4 00000000        0 
+                       A       RN               R0
+    5 00000000        1 
+                       E       RN               R1
+    6 00000000        2 
+                       C       RN               R2
+    7 00000000        4 
+                       Sum     RN               R4
+    8 00000000         
+    9 00000000                 AREA             cmeqe,CODE,READONLY
+   10 00000000                 ENTRY
+   11 00000000                 EXPORT           __main
+   12 00000000         
+   13 00000000         __main
+   14 00000000 F04F 0019       MOV              A,#25
+   15 00000004 F04F 010F       MOV              E,#15
+   16 00000008 F04F 0211       MOV              C,#17
+   17 0000000C F04F 0400       MOV              Sum,#0
+   18 00000010         
+   19 00000010 4404            ADD              Sum,A
+   20 00000012 EB04 04C1       ADD              Sum,E,LSL #3
+   21 00000016 F04F 0707       MOV              R7,#7
+   22 0000001A FB02 4407       MLA              Sum,C,R7,Sum
+   23 0000001E F1A4 0414       SUB              Sum,Sum,#20
+   24 00000022 EA4F 04A4       MOV              Sum,Sum,ASR #2 ;Divide total by
+                                                             four
+   25 00000026         
+   26 00000026         
+   27 00000026 E7FE    stop    B                stop
+   28 00000028                 ALIGN
+   29 00000028                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SE
+TA 528" --predefine="_RTE_ SETA 1" --predefine="STM32F446xx SETA 1" --list=.\li
+stings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 13 in file main.s
+   Uses
+      At line 11 in file main.s
+Comment: __main used once
+cmeqe 00000000
+
+Symbol: cmeqe
+   Definitions
+      At line 9 in file main.s
+   Uses
+      None
+Comment: cmeqe unused
+stop 00000026
+
+Symbol: stop
+   Definitions
+      At line 27 in file main.s
+   Uses
+      At line 27 in file main.s
+Comment: stop used once
+3 symbols
+342 symbols in table

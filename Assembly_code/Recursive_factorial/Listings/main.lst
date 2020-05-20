@@ -1,0 +1,97 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000                 AREA             fact,CODE,READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         
+    8 00000000         ;   ;iterative implementaions
+    9 00000000         ;__main
+   10 00000000         ;    MOV  R0,#8
+   11 00000000         ;    
+   12 00000000         ;Fact   MOV  R1,#1
+   13 00000000         ;loop   CMP  R0,#1
+   14 00000000         ;    BLS  done
+   15 00000000         ;    MUL  R1,R0,R1
+   16 00000000         ;    SUB  R0,R0,#1
+   17 00000000         ;    B  loop
+   18 00000000         
+   19 00000000         ;done   MOV  R0,R1
+   20 00000000         ;    BX  LR
+   21 00000000         ;    ALIGN
+   22 00000000         ;    END
+   23 00000000         
+   24 00000000         ;recursive implementaions
+   25 00000000         __main
+   26 00000000 F04F 0008       MOV              R0,#8
+   27 00000004         
+   28 00000004         Fact
+   29 00000004 2801            CMP              R0,#1
+   30 00000006 D909            BLS              done
+   31 00000008 B501            PUSH             {R0,LR}
+   32 0000000A F1A0 0001       SUB              R0,R0,#1
+   33 0000000E F7FF FFF9       BL               Fact
+   34 00000012 E8BD 4002       POP              {R1,LR}
+   35 00000016 FB00 F001       MUL              R0,R0,R1    ;R0=n*Fact(n-1)
+   36 0000001A 4770            BX               LR
+   37 0000001C         
+   38 0000001C         
+   39 0000001C         
+   40 0000001C F04F 0001 
+                       done    MOV              R0,#1
+   41 00000020 4770            BX               LR
+   42 00000022 00 00           ALIGN
+   43 00000024                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Fact 00000004
+
+Symbol: Fact
+   Definitions
+      At line 28 in file main.s
+   Uses
+      At line 33 in file main.s
+Comment: Fact used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 25 in file main.s
+   Uses
+      At line 6 in file main.s
+Comment: __main used once
+done 0000001C
+
+Symbol: done
+   Definitions
+      At line 40 in file main.s
+   Uses
+      At line 30 in file main.s
+Comment: done used once
+fact 00000000
+
+Symbol: fact
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: fact unused
+4 symbols
+340 symbols in table

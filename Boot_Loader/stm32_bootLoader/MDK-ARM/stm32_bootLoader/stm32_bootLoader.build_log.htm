@@ -1,0 +1,92 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.28.0.0
+Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: suraj dev, nagoba, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.28.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.28.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.6.0
+Dialog DLL:      TCM.DLL V1.36.2.0
+ 
+<h2>Project:</h2>
+E:\Keil_Project\Boot_Loader\stm32_bootLoader\MDK-ARM\stm32_bootLoader.uvprojx
+Project File Date:  03/27/2020
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'stm32_bootLoader'
+assembling startup_stm32f446xx.s...
+compiling stm32f4xx_it.c...
+compiling main.c...
+../Src/main.c(248): warning:  #513-D: a value of type "void *" cannot be assigned to an entity of type "void (*)(void)"
+  			app_reset_handler= (void*)resethandler_address;
+../Src/main.c: 1 warning, 0 errors
+compiling stm32f4xx_hal_msp.c...
+compiling stm32f4xx_hal_crc.c...
+compiling stm32f4xx_hal_tim.c...
+compiling bl_command.c...
+bl_command.c(203): warning:  #144-D: a value of type "void *" cannot be used to initialize an entity of type "void (*)(void)"
+  			void (*lest_jump)(void)= (void *)goto_add;
+bl_command.c(261): warning:  #550-D: variable "check_sum"  was set but never used
+  	uint8_t check_sum=0,len=0;
+bl_command.c(427): warning:  #188-D: enumerated type mixed with another type
+  	  status=(uint8_t)HAL_FLASHEx_Erase(&Flash_erase_init,&SectorError);
+bl_command.c: 3 warnings, 0 errors
+compiling stm32f4xx_hal_tim_ex.c...
+compiling stm32f4xx_hal_uart.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_exti.c...
+compiling system_stm32f4xx.c...
+linking...
+Program Size: Code=13484 RO-data=508 RW-data=68 ZI-data=1388  
+FromELF: creating hex file...
+"stm32_bootLoader\stm32_bootLoader.axf" - 0 Error(s), 4 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.6.0.pack
+                ARM.CMSIS.5.6.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.3.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.14.0.pack
+                Keil.STM32F4xx_DFP.2.14.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_stm32_bootLoader
+  C:\Users\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include
+  C:\Users\suraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.3.0
+Build Time Elapsed:  00:00:44
+</pre>
+</body>
+</html>

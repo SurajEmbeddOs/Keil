@@ -1,0 +1,67 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000                 AREA             fpu,CODE,READONLY
+    4 00000000                 ENTRY
+    5 00000000                 EXPORT           __main
+    6 00000000         
+    7 00000000         __main
+    8 00000000 4806            LDR              r0,= 0xE000ED88
+    9 00000002 6801            LDR              r1,[r0]
+   10 00000004 F441 0170       orr              r1,r1,#(0xf<<20)
+   11 00000008 6001            STR              R1,[R0]
+   12 0000000A         
+   13 0000000A F04F 537E       LDR              R3,=0x3F800000
+   14 0000000E EE01 3A90       VMOV.F           S3,R3
+   15 00000012         
+   16 00000012 ED9F 2A03       VLDR.F           S4,=6.0222146e23
+   17 00000016 EE12 4A10       VMOV.F           R4,S4
+   18 0000001A         
+   19 0000001A E7FE    stop    B                stop
+   20 0000001C                 END
+              E000ED88 
+              66FF0CFB 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 5 in file main.s
+Comment: __main used once
+fpu 00000000
+
+Symbol: fpu
+   Definitions
+      At line 3 in file main.s
+   Uses
+      None
+Comment: fpu unused
+stop 0000001A
+
+Symbol: stop
+   Definitions
+      At line 19 in file main.s
+   Uses
+      At line 19 in file main.s
+Comment: stop used once
+3 symbols
+341 symbols in table

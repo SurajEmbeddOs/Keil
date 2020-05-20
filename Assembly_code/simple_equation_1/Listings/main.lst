@@ -1,0 +1,102 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ; p= q+r+s
+    3 00000000         ;q=2,r=10,s=12
+    4 00000000         
+    5 00000000 00000002 
+                       Q       EQU              2
+    6 00000000 0000000A 
+                       R       EQU              10
+    7 00000000 0000000C 
+                       S       EQU              12
+    8 00000000         
+    9 00000000                 AREA             muCode,CODE,READONLY
+   10 00000000                 ENTRY
+   11 00000000                 EXPORT           __main
+   12 00000000         
+   13 00000000         __main
+   14 00000000 F04F 0002       MOV              R0,#Q
+   15 00000004 F04F 010A       MOV              R1,#R
+   16 00000008 F04F 020C       MOV              R2,#S
+   17 0000000C         
+   18 0000000C EB01 0300       ADD              R3,R1,R0
+   19 00000010 4413            ADD              R3,R3,R2
+   20 00000012         
+   21 00000012 E7FE    Stop    B                Stop
+   22 00000014         
+   23 00000014                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Stop 00000012
+
+Symbol: Stop
+   Definitions
+      At line 21 in file main.s
+   Uses
+      At line 21 in file main.s
+Comment: Stop used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 13 in file main.s
+   Uses
+      At line 11 in file main.s
+Comment: __main used once
+muCode 00000000
+
+Symbol: muCode
+   Definitions
+      At line 9 in file main.s
+   Uses
+      None
+Comment: muCode unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+Q 00000002
+
+Symbol: Q
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 14 in file main.s
+Comment: Q used once
+R 0000000A
+
+Symbol: R
+   Definitions
+      At line 6 in file main.s
+   Uses
+      At line 15 in file main.s
+Comment: R used once
+S 0000000C
+
+Symbol: S
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: S used once
+3 symbols
+342 symbols in table

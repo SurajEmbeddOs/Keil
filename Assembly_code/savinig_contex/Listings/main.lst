@@ -1,0 +1,67 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000                 AREA             mycode,CODE,READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         __main
+    8 00000000 4C03            LDR              R4,=0XBABAFACE
+    9 00000002 4D04            LDR              R5,=0XDADAFACE
+   10 00000004 4E04            LDR              R6,=0XA0A0FACE
+   11 00000006 4F05            LDR              R7,=0XBEAFFACE
+   12 00000008         
+   13 00000008 B5F0            STMDB            SP!,{R4-R7,LR}
+   14 0000000A BDF0            LDMIA            SP! ,{R4-R7,PC}
+   15 0000000C         
+   16 0000000C E7FE    Stop    B                Stop
+   17 0000000E 00 00           ALIGN
+   18 00000010                 END
+              BABAFACE 
+              DADAFACE 
+              A0A0FACE 
+              BEAFFACE 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Stop 0000000C
+
+Symbol: Stop
+   Definitions
+      At line 16 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: Stop used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 6 in file main.s
+Comment: __main used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 4 in file main.s
+   Uses
+      None
+Comment: mycode unused
+3 symbols
+341 symbols in table

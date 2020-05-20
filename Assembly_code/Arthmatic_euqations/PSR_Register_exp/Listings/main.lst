@@ -1,0 +1,112 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000         
+    5 00000000                 AREA             myCode,CODE,READONLY
+    6 00000000                 ENTRY
+    7 00000000                 EXPORT           __main
+    8 00000000         
+    9 00000000         __main
+   10 00000000         
+   11 00000000         ;Check zero flag
+   12 00000000         ;   MOV  R0,#4
+   13 00000000         ;   MOV  R1,#2
+   14 00000000         ;   MOV  R3,#4
+   15 00000000         ;   
+   16 00000000         ;   SUBS R4,R0,R1
+   17 00000000         ;   SUBS R4,R0,R3
+   18 00000000         
+   19 00000000         ;Check cary flag
+   20 00000000         ;   LDR  R0,=0xFAB14254
+   21 00000000         ;   LDR  R1,=0xFAB14254
+   22 00000000         ;   
+   23 00000000         ;   MOV  R2,#0x34
+   24 00000000         ;   MOV  R3,#0x35
+   25 00000000         ;   
+   26 00000000         ;   ADDS R5,R2,R3
+   27 00000000         ;   ADC  R6,R2,R3
+   28 00000000         ;Check overload flag 
+   29 00000000 490E            LDR              R1,=1000000000
+   30 00000002 4A0F            LDR              R2,=2000000000
+   31 00000004 4B0F            LDR              R3,=3000000000
+   32 00000006 4C10            LDR              R4,=4000000000
+   33 00000008 4D10            LDR              R5,=4100000000
+   34 0000000A         
+   35 0000000A F04F 0800       MOV              R8,#0
+   36 0000000E F04F 0900       MOV              R9,#0
+   37 00000012         
+   38 00000012 EB18 0800       ADDS             R8,R8,R0
+   39 00000016 F149 0900       ADC              R9,R9,#0
+   40 0000001A         
+   41 0000001A EB18 0801       ADDS             R8,R8,R1
+   42 0000001E F149 0900       ADC              R9,R9,#0
+   43 00000022         
+   44 00000022 EB18 0803       ADDS             R8,R8,R3
+   45 00000026 F149 0900       ADC              R9,R9,#0
+   46 0000002A         
+   47 0000002A EB18 0804       ADDS             R8,R8,R4
+   48 0000002E F149 0900       ADC              R9,R9,#0
+   49 00000032         
+   50 00000032 EB18 0805       ADDS             R8,R8,R5
+   51 00000036 F149 0900       ADC              R9,R9,#0
+   52 0000003A         
+   53 0000003A E7FE    stop    B                stop
+   54 0000003C                 ALIGN
+   55 0000003C         
+   56 0000003C                 END
+              3B9ACA00 
+              77359400 
+              B2D05E00 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              EE6B2800 
+              F4610900 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F446xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 9 in file main.s
+   Uses
+      At line 7 in file main.s
+Comment: __main used once
+myCode 00000000
+
+Symbol: myCode
+   Definitions
+      At line 5 in file main.s
+   Uses
+      None
+Comment: myCode unused
+stop 0000003A
+
+Symbol: stop
+   Definitions
+      At line 53 in file main.s
+   Uses
+      At line 53 in file main.s
+Comment: stop used once
+3 symbols
+341 symbols in table

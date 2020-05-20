@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp
+"g-timer\startup_stm32f446xx.o"
+"g-timer\main.o"
+"g-timer\stm32f4xx_it.o"
+"g-timer\stm32f4xx_hal_msp.o"
+"g-timer\stm32f4xx_hal_tim.o"
+"g-timer\stm32f4xx_hal_tim_ex.o"
+"g-timer\stm32f4xx_hal_uart.o"
+"g-timer\stm32f4xx_hal_rcc.o"
+"g-timer\stm32f4xx_hal_rcc_ex.o"
+"g-timer\stm32f4xx_hal_flash.o"
+"g-timer\stm32f4xx_hal_flash_ex.o"
+"g-timer\stm32f4xx_hal_flash_ramfunc.o"
+"g-timer\stm32f4xx_hal_gpio.o"
+"g-timer\stm32f4xx_hal_dma_ex.o"
+"g-timer\stm32f4xx_hal_dma.o"
+"g-timer\stm32f4xx_hal_pwr.o"
+"g-timer\stm32f4xx_hal_pwr_ex.o"
+"g-timer\stm32f4xx_hal_cortex.o"
+"g-timer\stm32f4xx_hal.o"
+"g-timer\stm32f4xx_hal_exti.o"
+"g-timer\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "G-timer\G-timer.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "G-timer.map" -o G-timer\G-timer.axf

@@ -1,0 +1,37 @@
+Banked Stack Pointer
+
+==============================
+1. Cortex M processor physically has 3 Stack pointers
+SP(R13),MSP and PSP
+MSP : Main stack pointer
+PSP :Process stack pointer
+
+SP is Called as Current stack pointer.
+
+2.After processor reset, By default , MSP will be 
+selected as current stack pointer.That means, SP copies the contents of MSP.
+
+3.Thread mode can change the current stack pointer to PSP bt configuring the
+CONTROL register SPSEL bit.
+
+4.Handler mode Will always use MSP as the current stack pointer.
+That means ,configuring the CONTROL register SPSEL bit being in the handler
+mode does not make sence.The write will be ignored.
+
+5.MSP will be intialised auomatically by the processor after reset
+by reading the content of the address 0x0000_0000.
+
+6.If you want to use the PSP then make sure that you initialize the 
+PSP to valid stack adress in your cade. 
+
+/*******************Important term*******************/
+0x00000400=1024 word
+1 word =4 bytes
+size is  4*1024= 4K bytes
+
+START OF SRM1 = 0x20000000
+SIZE OF SRM1 =112 KB= 112*1024 bytes =114688= 1c000
+END OF SRM1  : START OF SRM1 +SIZE OF SRM1 =(0x2000_0000+1c000) =(2001_C000‬-1)= 2001_BFFF‬
+
+
+

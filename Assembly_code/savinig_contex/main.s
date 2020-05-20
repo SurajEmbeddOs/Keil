@@ -1,0 +1,18 @@
+
+
+
+			AREA mycode,CODE,READONLY
+			ENTRY
+			EXPORT		__main
+__main
+			LDR		R4,=0XBABAFACE
+			LDR		R5,=0XDADAFACE
+			LDR		R6,=0XA0A0FACE
+			LDR		R7,=0XBEAFFACE
+			
+			STMDB	SP!,{R4-R7,LR}
+			LDMIA	SP!	,{R4-R7,PC}
+
+Stop		B		Stop
+			ALIGN
+			END

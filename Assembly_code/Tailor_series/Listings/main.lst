@@ -1,0 +1,165 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ;The Algorithm is a Taylor series with
+    3 00000000         ;4 terms (x=x-x^3/3!+x^5/5!-x^7/7!)
+    4 00000000         ;This formula works for all x in the range [0,pi/2]
+    5 00000000         ;register usage
+    6 00000000         ;s0 -input operand and return result 
+    7 00000000         ;s1 -1/3! (invfact3)
+    8 00000000         ;s2 -1/5! (invfact5)
+    9 00000000         ;s3 -1/7! (invfact7)
+   10 00000000         ;s4-x*s1 (xdiv3), then s4*s7 (x^2 * xdiv3) (xdiv3)
+   11 00000000         ;s5-x*s2 (xdiv5), then s5*s8 (x^4 * xdiv5) (xdiv5)
+   12 00000000         ;s6-x*s3 (xdiv7), then s6*s9 (x^6 * xdiv7) (xdiv7)
+   13 00000000         ;s7 - x^2
+   14 00000000         ;s8 - x^4
+   15 00000000         ;s9 - x^6
+   16 00000000         ;s10 - scratch
+   17 00000000         ; we can avoid the division by computing 1/3!,1/5!,etc a
+                       nd
+   18 00000000         ;using the constant in a multiplications
+   19 00000000         
+   20 00000000                 AREA             Tylor,CODE,READONLY
+   21 00000000                 ENTRY
+   22 00000000                 EXPORT           __main
+   23 00000000         
+   24 00000000         __main
+   25 00000000 4819            LDR              R0,= 0xE000ED88
+   26 00000002 6801            LDR              R1,[r0]
+   27 00000004 F441 0170       ORR              R1,R1,#(0xF<<20)
+   28 00000008 6001            STR              R1,[R0]
+   29 0000000A F3BF 8F4F       DSB
+   30 0000000E F3BF 8F6F       ISB
+   31 00000012         
+   32 00000012 ED9F 0A16       VLDR.F32         S0,=1.04176
+   33 00000016 F000 F801       BL               SinCal
+   34 0000001A         
+   35 0000001A E7FE    stop    B                stop
+   36 0000001C         
+   37 0000001C         SinCal
+   38 0000001C EDDF 0A0F       VLDR.F32         S1,invfact3
+   39 00000020 ED9F 1A0F       VLDR.F32         S2,invfact5
+   40 00000024 EDDF 1A0F       VLDR.F32         S3,invfact7
+   41 00000028         
+   42 00000028 EE20 2A20       VMUL.F32         S4,S0,S1    ;Compute Xdiv3
+   43 0000002C EE60 3A00       VMUL.F32         S7,S0,S0    ;x^2
+   44 00000030 EE60 2A01       VMUL.F32         S5,S0,S2    ;Compute Xdiv5
+   45 00000034 EE22 2A23       VMUL.F32         S4,S4,S7    ;Compute x3div3 
+   46 00000038 EE23 4AA3       VMUL.F32         S8,S7,S7    ;Compute x^4
+   47 0000003C         
+   48 0000003C EE20 3A21       VMUL.F32         S6,S0,S3    ;Compute xdiv7
+   49 00000040 EE20 5A02       VMUL.F32         S10,S0,S4   ;Compute term12 ,x-
+                                                            x^3/3!
+   50 00000044         
+   51 00000044 EE63 4A84       VMUL.F32         S9,S7,S8    ;Compute x^6
+   52 00000048 EE62 2A84       VMUL.F32         S5,S5,S8    ;Compute x5div5
+   53 0000004C EE23 3A24       VMUL.F32         S6,S6,S9    ;Compute x7div7
+   54 00000050         
+   55 00000050 EE25 5A22       VMUL.F32         S10,S10,S5  ;Compute term123,,x
+                                                            -x^3/3! +x^5/5!
+   56 00000054         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   57 00000054 EE35 0A43       VSUB.F32         S0,S10,S6   ;Comput Result
+   58 00000058         
+   59 00000058 4770            BX               LR
+   60 0000005A         
+   61 0000005A         
+   62 0000005A         
+   63 0000005A         
+   64 0000005A         
+   65 0000005A         
+   66 0000005A 00 00 3E2AAAAA 
+                       invfact3
+                               DCD              0x3E2AAAAA  ;1/3!
+   67 00000060 3C088888 
+                       invfact5
+                               DCD              0x3C088888  ;1/5!
+   68 00000064 39500D00 
+                       invfact7
+                               DCD              0x39500D00  ;1/7!
+   69 00000068         
+   70 00000068         
+   71 00000068                 END
+              E000ED88 
+              3F855864 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SE
+TA 528" --predefine="_RTE_ SETA 1" --predefine="STM32F446xx SETA 1" --list=.\li
+stings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+SinCal 0000001C
+
+Symbol: SinCal
+   Definitions
+      At line 37 in file main.s
+   Uses
+      At line 33 in file main.s
+Comment: SinCal used once
+Tylor 00000000
+
+Symbol: Tylor
+   Definitions
+      At line 20 in file main.s
+   Uses
+      None
+Comment: Tylor unused
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 24 in file main.s
+   Uses
+      At line 22 in file main.s
+Comment: __main used once
+invfact3 0000005C
+
+Symbol: invfact3
+   Definitions
+      At line 66 in file main.s
+   Uses
+      At line 38 in file main.s
+Comment: invfact3 used once
+invfact5 00000060
+
+Symbol: invfact5
+   Definitions
+      At line 67 in file main.s
+   Uses
+      At line 39 in file main.s
+Comment: invfact5 used once
+invfact7 00000064
+
+Symbol: invfact7
+   Definitions
+      At line 68 in file main.s
+   Uses
+      At line 40 in file main.s
+Comment: invfact7 used once
+stop 0000001A
+
+Symbol: stop
+   Definitions
+      At line 35 in file main.s
+   Uses
+      At line 35 in file main.s
+Comment: stop used once
+7 symbols
+344 symbols in table

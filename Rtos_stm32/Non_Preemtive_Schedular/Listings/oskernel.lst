@@ -1,0 +1,108 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+    3 00000000                 THUMB
+    4 00000000                 EXTERN           currentPt
+    5 00000000                 EXPORT           SysTick_Handler
+    6 00000000                 EXPORT           osSchedulaLaunch
+    7 00000000         
+    8 00000000         
+    9 00000000         SysTick_Handler                      ;save r0,r1,r2,r3,r
+                                                            12,lr,pc,psr      
+   10 00000000 B672            CPSID            I
+   11 00000002 E92D 0FF0       PUSH             {R4-R11}    ;save r4,r5,r6,r7,r
+                                                            8,r9,r10,r11   
+   12 00000006 480D            LDR              R0, =currentPt ; r0 points to c
+                                                            urrentPt       
+   13 00000008 6801            LDR              R1, [R0]    ; r1= currentPt   
+   14 0000000A F8C1 D000       STR              SP, [R1]
+   15 0000000E 6849            LDR              R1, [R1,#4] ; r1 =currentPt->ne
+                                                            xt   
+   16 00000010 6001            STR              R1, [R0]    ;currentPt =r1   
+   17 00000012 F8D1 D000       LDR              SP, [R1]    ;SP= currentPt->sta
+                                                            ckPt   
+   18 00000016 E8BD 0FF0       POP              {R4-R11}
+   19 0000001A B662            CPSIE            I
+   20 0000001C 4770            BX               LR
+   21 0000001E         
+   22 0000001E         
+   23 0000001E         
+   24 0000001E         osSchedulaLaunch
+   25 0000001E 4807            LDR              R0, =currentPt
+   26 00000020 6802            LDR              R2, [R0]    ; R2 =currentPt    
+                                                               
+   27 00000022 F8D2 D000       LDR              SP, [R2]    ;SP = currentPt->st
+                                                            ackPt    
+   28 00000026 E8BD 0FF0       POP              {R4-R11}
+   29 0000002A BC0F            POP              {R0-R3}
+   30 0000002C F85D CB04       POP              {R12}
+   31 00000030 B001            ADD              SP,SP,#4
+   32 00000032 F85D EB04       POP              {LR}
+   33 00000036 B001            ADD              SP,SP,#4
+   34 00000038 B662            CPSIE            I
+   35 0000003A 4770            BX               LR
+   36 0000003C         
+   37 0000003C                 ALIGN
+   38 0000003C                 END
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\oskernel_1.d -o.\objects\oskernel_1.o -I.\RTE\_Target
+_1 -IC:\Users\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include 
+-IC:\Users\suraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSI
+S\Device\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISIO
+N_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine="STM32F446xx SETA 1"
+ --list=.\listings\oskernel.lst osKernel.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 2 in file osKernel.s
+   Uses
+      None
+Comment: .text unused
+SysTick_Handler 00000000
+
+Symbol: SysTick_Handler
+   Definitions
+      At line 9 in file osKernel.s
+   Uses
+      At line 5 in file osKernel.s
+Comment: SysTick_Handler used once
+osSchedulaLaunch 0000001E
+
+Symbol: osSchedulaLaunch
+   Definitions
+      At line 24 in file osKernel.s
+   Uses
+      At line 6 in file osKernel.s
+Comment: osSchedulaLaunch used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+currentPt 00000000
+
+Symbol: currentPt
+   Definitions
+      At line 4 in file osKernel.s
+   Uses
+      At line 12 in file osKernel.s
+      At line 25 in file osKernel.s
+
+1 symbol
+341 symbols in table

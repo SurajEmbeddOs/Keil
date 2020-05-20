@@ -1,0 +1,15 @@
+free_rtos\segger_sysview_config_freertos.o: ..\SEGGER\SEGGER_SYSVIEW_Config_FreeRTOS.c
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+free_rtos\segger_sysview_config_freertos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+free_rtos\segger_sysview_config_freertos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+free_rtos\segger_sysview_config_freertos.o: ../Inc/FreeRTOSConfig.h
+free_rtos\segger_sysview_config_freertos.o: ..\SEGGER\SEGGER_SYSVIEW_FreeRTOS.h
+free_rtos\segger_sysview_config_freertos.o: ..\SEGGER\SEGGER_SYSVIEW.h
+free_rtos\segger_sysview_config_freertos.o: ..\SEGGER\SEGGER.h
+free_rtos\segger_sysview_config_freertos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+free_rtos\segger_sysview_config_freertos.o: ..\SEGGER\Global.h
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+free_rtos\segger_sysview_config_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h

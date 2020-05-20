@@ -1,0 +1,142 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ;0x40023800
+    3 00000000 40023880 
+                       GPIOA_RCC_CLOCK_R
+                               EQU              0x40023880
+    4 00000000 40020000 
+                       GPIOA_MODE_R
+                               EQU              0x40020000
+    5 00000000 40020014 
+                       GPIOA_ODR_R
+                               EQU              0x40020014
+    6 00000000         
+    7 00000000         
+    8 00000000                 AREA             |.text |,CODE,READONLY,ALIGN=2
+    9 00000000                 THUMB
+   10 00000000                 EXPORT           __main
+   11 00000000         
+   12 00000000         __main
+   13 00000000 F000 F803       BL               GPIO_Init
+   14 00000004         
+   15 00000004 F000 F80B 
+                       loop    BL               GPIO_ON
+   16 00000008 E7FC            B                loop
+   17 0000000A         
+   18 0000000A         GPIO_Init
+   19 0000000A 4907            LDR              R1,=GPIOA_RCC_CLOCK_R
+   20 0000000C 6808            LDR              R0,[R1]
+   21 0000000E F040 0000       ORR              R0,R0,#0x00
+   22 00000012 6008            STR              R0,[R1]
+   23 00000014         
+   24 00000014 4905            LDR              R1,=GPIOA_MODE_R
+   25 00000016 F44F 6080       LDR              R0,=0x400
+   26 0000001A 6008            STR              R0,[R1]
+   27 0000001C         
+   28 0000001C         
+   29 0000001C         
+   30 0000001C 4770            BX               LR
+   31 0000001E         
+   32 0000001E         
+   33 0000001E         GPIO_ON
+   34 0000001E 4904            LDR              R1,=GPIOA_ODR_R
+   35 00000020 F04F 0020       LDR              R0,=0x20
+   36 00000024 6008            STR              R0,[R1]
+   37 00000026         
+   38 00000026 4770            BX               LR
+   39 00000028                 ALIGN
+   40 00000028                 END
+              40023880 
+              40020000 
+              40020014 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\User
+s\suraj\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\s
+uraj\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\
+STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SE
+TA 528" --predefine="_RTE_ SETA 1" --predefine="STM32F446xx SETA 1" --list=.\li
+stings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text  00000000
+
+Symbol: .text 
+   Definitions
+      At line 8 in file main.s
+   Uses
+      None
+Comment: .text  unused
+GPIO_Init 0000000A
+
+Symbol: GPIO_Init
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: GPIO_Init used once
+GPIO_ON 0000001E
+
+Symbol: GPIO_ON
+   Definitions
+      At line 33 in file main.s
+   Uses
+      At line 15 in file main.s
+Comment: GPIO_ON used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 12 in file main.s
+   Uses
+      At line 10 in file main.s
+Comment: __main used once
+loop 00000004
+
+Symbol: loop
+   Definitions
+      At line 15 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: loop used once
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+GPIOA_MODE_R 40020000
+
+Symbol: GPIOA_MODE_R
+   Definitions
+      At line 4 in file main.s
+   Uses
+      At line 24 in file main.s
+Comment: GPIOA_MODE_R used once
+GPIOA_ODR_R 40020014
+
+Symbol: GPIOA_ODR_R
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 34 in file main.s
+Comment: GPIOA_ODR_R used once
+GPIOA_RCC_CLOCK_R 40023880
+
+Symbol: GPIOA_RCC_CLOCK_R
+   Definitions
+      At line 3 in file main.s
+   Uses
+      At line 19 in file main.s
+Comment: GPIOA_RCC_CLOCK_R used once
+3 symbols
+345 symbols in table
